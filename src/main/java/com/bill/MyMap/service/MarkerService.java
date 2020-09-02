@@ -1,6 +1,7 @@
 package com.bill.MyMap.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.bill.MyMap.dao.MarkerDao;
 import com.bill.MyMap.model.HttpDataTransferObject;
 import com.bill.MyMap.model.MarkerPojo;
 import com.bill.MyMap.util.HttpDataTransferUtil;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -33,6 +35,15 @@ public class MarkerService {
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 	
+	public ResponseEntity<?> queryAllMarker(HttpDataTransferObject reqHDTO) {
+		Map<String, Object> resp = new HashMap<>();
+		
+		List<MarkerPojo> markers = markerDao.findAll();
+		
+		resp.put("MARKER", markers);
+		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
+	}
+	
 	public ResponseEntity<?> addMarker(HttpDataTransferObject reqHDTO) {
 		Map<String, Object> resp = new HashMap<>();
 		
@@ -40,11 +51,11 @@ public class MarkerService {
 		
 		log.info("=========insert Begin!!==========");
 		//新增 點位資料
-		markerDao.addMarker(marker);
-		log.info(marker.toString());
+		MarkerPojo pojo = markerDao.addMarker(marker);
+		log.info(pojo.toString());
 		log.info("=========insert End!!==========");
 		
-		resp.put("MARKER", marker);
+		resp.put("MARKER", pojo);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 }

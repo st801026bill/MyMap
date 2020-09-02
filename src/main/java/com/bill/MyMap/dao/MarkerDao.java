@@ -1,10 +1,14 @@
 package com.bill.MyMap.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bill.MyMap.entity.MarkerPo;
+import com.bill.MyMap.enums.ErrorType;
+import com.bill.MyMap.exception.ModuleException;
 import com.bill.MyMap.model.MarkerPojo;
 import com.bill.MyMap.repository.MarkerRepository;
 import com.bill.MyMap.util.PojoUtil;
@@ -20,17 +24,22 @@ public class MarkerDao {
 		MarkerPo po = markerRepository.findBySn(sn);
 		return pojoUtil.transPo2Pojo(po, "");
 	}
+
+	public List<MarkerPojo> findAll() {
+		return pojoUtil.transPo2Pojo(markerRepository.findAll());
+	}
 	
 	/**
 	 * <pre>
-	 *  新增車險保單資料
+	 *  新增 點位資料
 	 * @param pojo
 	 * @return
 	 * </pre>
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public void addMarker(MarkerPojo pojo) {
-		MarkerPo addedMarker = markerRepository.save(pojoUtil.transPojo2Po(pojo));
-		//if(null == addedMarker.getSn()) throw new ModuleException(ErrorType.DATABASE_ERROR, "VehiclePolicy");
+	public MarkerPojo addMarker(MarkerPojo pojo) {
+		MarkerPo po = markerRepository.save(pojoUtil.transPojo2Po(pojo));
+		if(null == po.getSn()) throw new ModuleException(ErrorType.DATABASE_ERROR, "VehiclePolicy");
+		return pojoUtil.transPo2Pojo(po, "");
 	}
 }

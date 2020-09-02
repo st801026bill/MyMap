@@ -31,6 +31,15 @@ public class MarkerController {
 		return markerService.getMarker(reqHDTO);
 	}
 	
+	@RequestMapping(value="/queryAll",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> queryAllMarker(@RequestBody HttpDataTransferObject reqHDTO) {
+		
+		log.info("Got Request body:{}", reqHDTO);
+		return markerService.queryAllMarker(reqHDTO);
+	}
 	
 	@RequestMapping(value="/add",
 			method = RequestMethod.POST,
@@ -41,6 +50,4 @@ public class MarkerController {
 		log.info("Got Request body:{}", reqHDTO);
 		return markerService.addMarker(reqHDTO);
 	}
-	
-	
 }
