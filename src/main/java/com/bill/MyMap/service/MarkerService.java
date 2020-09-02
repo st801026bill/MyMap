@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.bill.MyMap.dao.MarkerDao;
 import com.bill.MyMap.model.HttpDataTransferObject;
-import com.bill.MyMap.model.Marker;
+import com.bill.MyMap.model.MarkerPojo;
 import com.bill.MyMap.util.HttpDataTransferUtil;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -28,7 +27,22 @@ public class MarkerService {
 		Map<String, Object> resp = new HashMap<>();
 		
 		Integer sn = httpDataTransferUtil.getTranrqUnderlyingType(reqHDTO, "SN", Integer.class);
-		Marker marker = markerDao.findBySn(sn);
+		MarkerPojo marker = markerDao.findBySn(sn);
+		
+		resp.put("MARKER", marker);
+		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> addMarker(HttpDataTransferObject reqHDTO) {
+		Map<String, Object> resp = new HashMap<>();
+		
+		MarkerPojo marker = httpDataTransferUtil.getDataBean(reqHDTO, "", MarkerPojo.class);
+		
+		log.info("=========insert Begin!!==========");
+		//新增 點位資料
+		markerDao.addMarker(marker);
+		log.info(marker.toString());
+		log.info("=========insert End!!==========");
 		
 		resp.put("MARKER", marker);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);

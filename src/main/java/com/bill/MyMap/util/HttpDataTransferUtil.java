@@ -3,11 +3,13 @@ package com.bill.MyMap.util;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.bill.MyMap.model.BasePojo;
 import com.bill.MyMap.model.HttpDataTransferObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +26,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class HttpDataTransferUtil {
+	@Autowired
+	private PojoUtil pojoUtil;
+	
 	private HttpHeaders headers;
 	private ObjectMapper jacksonMapper;
 	public HttpDataTransferUtil () {
@@ -100,5 +105,34 @@ public class HttpDataTransferUtil {
 			log.debug("Get tranrs value from HttpDataTransferObject fail", cce);
 		}
 		return value;
+	}
+	
+	/**
+	 * <pre>
+	 * 從 reqHDTO 取出 TRANRQ 裡的 pojo
+	 * (key為空的話則是取TRANRQ本身)
+	 * 若資料格式錯誤或無此key則return null
+	 * @param <T>				BasePojo
+	 * @param reqHDTO			HttpDataTransferObject
+	 * @param key				String
+	 * @param pojoClass			Class<T>
+	 * @param mapKeyNamingConventionType	NamingConventionType
+	 * @return pojo
+	 * </pre>
+	 */
+	public <T extends BasePojo> T getDataBean(HttpDataTransferObject reqHDTO, String key, Class<T> pojoClass) {
+		Object mapObj;
+		if(StringUtils.isBlank(key)) {
+			mapObj = reqHDTO.getData();
+		} else {
+			mapObj = reqHDTO.getData().get(key);
+		}
+		T pojo = null;
+		try {
+			pojo = pojoUtil.transMap2Bean((Map<String, Object>) mapObj, pojoClass);
+		} catch (ClassCastException cce) {
+			log.debug("Get trans value from HttpDataTransferObject fail", cce);
+		}
+		return pojo;
 	}
 }

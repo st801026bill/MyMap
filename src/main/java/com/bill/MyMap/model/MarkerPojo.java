@@ -1,11 +1,7 @@
 package com.bill.MyMap.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.math.BigInteger;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,25 +19,20 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Entity
-@Table(name = "MARKER")
-public class Marker {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "SN", nullable = false)
+@JsonIgnoreProperties(ignoreUnknown = true)		
+public class MarkerPojo implements BasePojo {
+	@JsonProperty(value = "SN")
 	private Integer sn;
-	
-	@Column(name = "NAME", length = 32, nullable = false)
+	@JsonProperty(value = "NAME")
 	private String name;
-	@Column(name = "ADDRESS", length = 128, nullable = false)
+	@JsonProperty(value = "ADDRESS")
 	private String address;
 	@JsonProperty(value = "LONGITUDE")
 	private float longitude;
 	@JsonProperty(value = "LATITUDE")
 	private float latitude;
-	@Column(name = "COMMENT", length = 128, nullable = false)
+	@JsonProperty(value = "COMMENT")
 	private String comment;
-	@Column(name = "URL", length = 512, nullable = false)
+	@JsonProperty(value = "URL")
 	private String url;
 }
