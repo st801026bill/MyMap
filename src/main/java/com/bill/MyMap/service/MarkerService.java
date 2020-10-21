@@ -40,7 +40,7 @@ public class MarkerService {
 		
 		List<MarkerPojo> markers = markerDao.findAll();
 		
-		resp.put("MARKER", markers);
+		resp.put("MARKERS", markers);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 	
