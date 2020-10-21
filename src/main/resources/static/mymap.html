@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <title>我的地圖</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	<style type="text/css">
+		#map {
+		  height: 100%;
+		}
+		html, body {
+		  height: 100%;
+		  margin: 0;
+		  padding: 0;
+		}
+	</style>
+    <!-- 掛載CSS樣式 -->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+</head>
+<body>
+    	<!--一、導覽列-->
+    	<nav class="navbar navbar-expand navbar-dark bg-info fixed-top">
+    		<a href="#menu-toggle" id="menu-toggle" class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    		<div class="container-fluid">
+           		<a class="navbar-brand" href="#">我的地圖</a>
+                <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#sidebar-wrapper">
+                    <span class="navbar-toggler-icon"></span>
+                </button>           
+	         </div>
+    	</nav>
+		<div id="wrapper" class="toggled">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                	<li class="sidebar-brand"> <a href="#"> 功能選單 </a> </li>
+                	<li> <a class="nav-link" href="">功能一</a></li>
+                	<li> <a class="nav-link" href="">功能二</a></li>
+                	<li> <a class="nav-link" href="">功能三</a></li>
+               	</ul>
+            </div> <!-- /#sidebar-wrapper -->
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+            	<div class="container-fluid">
+            		<div class="row">
+            			<div class="col-7 col-lg-9">
+	            			<div class="card">
+								<div class="card-header">地圖管理</div>
+				  				<div class="card-body" style="height:75vh">
+									<div id="map"></div>
+								</div>
+							</div>
+						</div>
+	                    <div class="col-5 col-lg-3">
+                            <div id="list-example" class="list-group">
+                                    <a class="list-group-item list-group-item-action" href="#item1">1. Jumbotron</a>
+                                    <a class="list-group-item list-group-item-action" href="#item2">2. Full-width Jumbotron</a>
+                            </div>
+	                    </div>
+					</div>
+				</div>
+            </div> <!-- /#page-content-wrapper -->
+        </div> <!-- /#wrapper -->
+    
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="js/popper.min.js"></script>
+    
+    <script src="/webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfZ2PYiFvklzzV-bN7K8hF6gTVTCNn7E" defer></script>
+    
+    <script src="./js/util/mapUtil.js"></script>
+    <script src="./js/mymap.js"></script>
+</body>
+	
+</html>
