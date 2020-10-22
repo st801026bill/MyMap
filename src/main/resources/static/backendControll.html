@@ -30,63 +30,93 @@
     	<nav class="navbar navbar-expand navbar-dark bg-info fixed-top">
     		<a href="#menu-toggle" id="menu-toggle" class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
     		<div class="container-fluid">
-         		<a class="navbar-brand" href="#">我的地圖</a>
-               	<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#sidebar-wrapper">
+         		<a class="navbar-brand" href="#">我的地圖</a>   
+		  		<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#sidebar-wrapper">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 		  		<div class="collapse navbar-collapse">
 		    	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-		      			<li class="nav-item active">
-		        			<a class="nav-link" href="mymap.html">地圖管理<span class="sr-only">(current)</span></a>
-		      			</li>
 		      			<li class="nav-item">
-		        			<a class="nav-link" href="backendControll.html">後台管理</a>
+		        			<a class="nav-link" href="mymap.html">地圖管理</a>
+		      			</li>
+		      			<li class="nav-item active">
+		        			<a class="nav-link" href="backendControll.html">後台管理<span class="sr-only">(current)</span></a>
 		      			</li>
 		    		</ul>
 		  		</div>
 		    </div>
     	</nav>
-		<div id="wrapper" class="toggled">
+    	
+    	<div id="wrapper" class="toggled">
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
-                	<li class="sidebar-brand"> <a href="#"> 地點 </a> </li>
-                	<li> <a class="nav-link" href="">全部</a></li>
-                	<li> <a class="nav-link" href="">台灣 - 北部</a></li>
-                	<li> <a class="nav-link" href="">台灣 - 中部</a></li>
-                	<li> <a class="nav-link" href="">台灣 - 南部</a></li>
-                	<li> <a class="nav-link" href="">台灣 - 東部</a></li>
-                	<li> <a class="nav-link" href="">台灣 - 外島</a></li>
+                	<li class="sidebar-brand"> <a href="#">後台管理</a></li>
+                	<li> <a class="nav-link" href="">新增地點</a></li>
                	</ul>
             </div> <!-- /#sidebar-wrapper -->
             <!-- Page Content -->
             <div id="page-content-wrapper">
             	<div class="container-fluid">
-            		<div class="row">
-            			<div class="col-8 col-lg-9">
-	            			<div class="card">
+            		<nav aria-label="breadcrumb">
+	                    <ol class="breadcrumb">
+	                        <li class="breadcrumb-item">後台管理</li>
+	                        <li class="breadcrumb-item active" aria-current="page">新增地點</li>
+	                    </ol>
+                	</nav>
+                	<div class="row">
+                		<div class="col-sm-6">
+		                	<div class="card">
+								<div class="card-header"><i class="far fa-image"></i>&nbsp;新增地點</div>
+				  				<div class="card-body" style="height:65vh">
+				            		<div class="row">
+				            			<div class="col-sm-6 col-xs-12">
+											<label for="usr">名稱:</label>
+										  	<input type="text" class="form-control" id="usr">
+										</div>
+										<div class="col-sm-6 col-xs-12">
+										  	<label for="pwd">地址:</label>
+										  	<input type="password" class="form-control" id="pwd">
+										</div>
+									</div>
+									<div class="row">
+				            			<div class="col-sm-6 col-xs-12">
+											<label for="usr">經度:</label>
+										  	<input type="text" class="form-control" id="usr">
+										</div>
+										<div class="col-sm-6 col-xs-12">
+										  	<label for="pwd">緯度:</label>
+										  	<input type="password" class="form-control" id="pwd">
+										</div>
+									</div>
+									<div class="row">
+				            			<div class="col-sm-6 col-xs-12">
+											<label for="usr">備註:</label>
+										  	<input type="text" class="form-control" id="usr">
+										</div>
+										<div class="col-sm-6 col-xs-12">
+										  	<label for="pwd">網址:</label>
+										  	<input type="password" class="form-control" id="pwd">
+										</div>
+									</div>
+									<br>
+									<button type="button" class="btn btn-primary btn-block">新增</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="card">
 								<div class="card-header"><i class="far fa-image"></i>&nbsp;地圖管理</div>
-				  				<div class="card-body" style="height:75vh">
+				  				<div class="card-body" style="height:65vh">
 									<div id="map"></div>
 								</div>
 							</div>
 						</div>
-	                    <div class="col-4 col-lg-3">
-	                    	<nav aria-label="breadcrumb">
-			                    <ol class="breadcrumb">
-			                        <li class="breadcrumb-item">我的地圖</li>
-			                        <li class="breadcrumb-item active" aria-current="page">台灣 - 北部</li>
-			                    </ol>
-		                	</nav>
-                            <div id="list-example" class="list-group" style="height:73vh; overflow-y:scroll">
-                            	<!-- <a class="list-group-item list-group-item-action" href="#item1">1. Jumbotron</a> -->
-                            </div>
-	                    </div>
 					</div>
 				</div>
             </div> <!-- /#page-content-wrapper -->
         </div> <!-- /#wrapper -->
-    
+    	
 	    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 	    <script type="text/javascript" charset="UTF-8" src="js/util/popper.min.js"></script>
 	    <script src="/webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>

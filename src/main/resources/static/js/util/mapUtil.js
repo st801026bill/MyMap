@@ -4,6 +4,8 @@ const markerImg = [
 	"http://maps.google.com/mapfiles/ms/icons/green-dot.png",	//green
 ];
 
+let lastInfo = null;
+
 function gettingPosition(){
 	if(navigator.geolocation){
         return new Promise((resolve, reject) => {
@@ -25,7 +27,10 @@ function successCallback(map, position){
 		lng: position.coords.longitude, 
         lat: position.coords.latitude
 	};
-	addMarker(map, latlon, "您的位置", 1);
+	addMarker(map, latlon, "您的位置", 0);
+	
+	map.setCenter(latlon); //定位到目前位置
+    map.setZoom(16);
 }
 
 function errorCallback(error) {
@@ -33,13 +38,22 @@ function errorCallback(error) {
 }
 
 function addMarker(map, latlon, title, index) {
-	new google.maps.Marker({
+	var marker = new google.maps.Marker({
 	    position: latlon,
 	    map,
 	    title: title.toString(),
 		icon: markerImg[index],
   	});
+	return marker;
 }
 
-
-
+function setMarkerInfo(map, marker, infoMsg) {
+	var info = new google.maps.InfoWindow({
+        content: infoMsg
+    });
+    marker.addListener('click', function() {
+		if(lastInfo !== null) lastInfo.close();
+        info.open(map, marker);
+		lastInfo = info;
+    });
+}
