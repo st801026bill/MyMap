@@ -22,36 +22,36 @@ function init() {
 
 
 function initMap() {
-	var mapOption = {
-		center: { lat: 0, lng: 0 },
-		zoom: 10,
-	}
-	map = new google.maps.Map(document.getElementById("map"), mapOption);
+	var taiwan = new google.maps.LatLng(23.64550, 120.99705);	
+	var mapOptions = {
+        zoom: 7,
+        center: taiwan,       //中心座標
+        scaleControl: true,    //比例尺
+
+        //MapType位置
+        mapTypeControl: false,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_LEFT
+        },
+
+        //Zoom位置
+        zoomControl: false,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.TOP_RIGHT
+        },
+
+        //小人位置
+        streetViewControl: false,
+        streetViewControlOptions: {
+            position: google.maps.ControlPosition.TOP_RIGHT
+        } 
+    };
+	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	
 	//取得使用者位置
 	gettingPosition()
 		.then(position => successCallback(map, position))
 		.catch(error => errorCallback(error));
-	
-	//query all markers
-	var data = {};
-	data.DATA={};
-	var jsonData = JSON.stringify(data);
-	var result = sendRequest("POST", "application/json", "/marker/queryAll", jsonData, "json", null);
-	var markers = result.DATA.MARKERS;
-	markers.forEach(marker => {
-		let latlon = {
-			lng: marker.LONGITUDE, 
-	        lat: marker.LATITUDE
-		};
-		let resultMark = addMarker(map, latlon, marker.SN, 1);
-		let infoMsg = "<div align='left'><b>名稱："+ marker.NAME +"</div>";
-		setMarkerInfo(map, resultMark, infoMsg)
-	});
-	
-	markers.forEach(marker => {
-		$('.list-group').append("<a class='list-group-item list-group-item-action' href='"+ marker.URL +"' target='_blank'>"+ marker.NAME +"<br>"+ marker.COMMENT +"</a>");
-	});
-	
 }
 
