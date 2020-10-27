@@ -49,12 +49,10 @@ public class MarkerService {
 		
 		MarkerPojo marker = httpDataTransferUtil.getDataBean(reqHDTO, "", MarkerPojo.class);
 		
-		log.info("=========insert Begin!!==========");
 		//新增 點位資料
 		MarkerPojo pojo = markerDao.addMarker(marker);
 		log.info(pojo.toString());
-		log.info("=========insert End!!==========");
-		
+
 		resp.put("MARKER", pojo);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}

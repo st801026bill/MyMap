@@ -3,6 +3,7 @@ let map;
 $(document).ready(function(){
 	init();
 	initMap();
+	initButton();
 });
 
 function init() {
@@ -53,5 +54,11 @@ function initMap() {
 	gettingPosition()
 		.then(position => successCallback(map, position))
 		.catch(error => errorCallback(error));
+}
+
+function initButton() {
+	$('#addMarker').click(function(){
+		
+	});
 }
 

@@ -50,17 +50,35 @@
     	<div id="wrapper" class="toggled">
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
+            	<ul class="sidebar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <!-- <ul class="sidebar-nav  bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"> -->
                 	<li class="sidebar-brand"> <a href="#">後台管理</a></li>
-                	<li> <a class="nav-link" href="backendControll01.html">新增地點</a></li>
+                	<!-- <li> <a class="nav-link" href="backendControll01.html"></a></li> -->
+			      	<li class="nav-item">
+			        	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#markerAction" aria-expanded="true" aria-controls="markerAction">
+			          		<i class="fas fa-map-marker-alt"></i>&nbsp;
+			          		<span>地點管理</span>
+			        	</a>
+			        	<div id="markerAction" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				          	<div class="bg-white py-2 collapse-inner rounded">
+				            	<h6 class="collapse-header">地點管理</h6>
+				            	<hr class="sidebar-divider my-0">
+				            	<a class="collapse-item" href="backendControll01.html">新增地點</a>
+				            	<a class="collapse-item" href="backendControll02.html">修改地點</a>
+				          	</div>
+			        	</div>
+			      	</li>
                	</ul>
-            </div> <!-- /#sidebar-wrapper -->
+            </div><!-- /#sidebar-wrapper -->
+            <!-- Sidebar -->         
+            
             <!-- Page Content -->
             <div id="page-content-wrapper">
             	<div class="container-fluid">
             		<nav aria-label="breadcrumb">
 	                    <ol class="breadcrumb">
 	                        <li class="breadcrumb-item">後台管理</li>
+	                        <li class="breadcrumb-item">地點管理</li>
 	                        <li class="breadcrumb-item active" aria-current="page">新增地點</li>
 	                    </ol>
                 	</nav>
@@ -100,7 +118,7 @@
 										</div>
 									</div>
 									<br>
-									<button type="button" class="btn btn-primary btn-block">新增</button>
+									<button type="button" class="btn btn-primary btn-block" id="addMarker">新增</button>
 								</div>
 							</div>
 						</div>
