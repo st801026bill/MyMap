@@ -20,13 +20,11 @@ public class MarkerController {
 	@Autowired
 	private MarkerService markerService;
 	
-	
 	@RequestMapping(value="/query",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> queryMarker(@RequestBody HttpDataTransferObject reqHDTO) {
-		
 		log.info("Got Request body:{}", reqHDTO);
 		return markerService.getMarker(reqHDTO);
 	}
@@ -36,7 +34,6 @@ public class MarkerController {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> queryAllMarker(@RequestBody HttpDataTransferObject reqHDTO) {
-		
 		log.info("Got Request body:{}", reqHDTO);
 		return markerService.queryAllMarker(reqHDTO);
 	}
@@ -46,7 +43,6 @@ public class MarkerController {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addMarker(@RequestBody HttpDataTransferObject reqHDTO) {
-		
 		log.info("Got Request body:{}", reqHDTO);
 		return markerService.addMarker(reqHDTO);
 	}

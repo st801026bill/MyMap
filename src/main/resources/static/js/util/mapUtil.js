@@ -6,6 +6,14 @@ const markerImg = [
 
 let lastInfo = null;
 
+function initSearchBox(searchBoxId) {
+	//建立SearchBox
+	const input = document.getElementById(searchBoxId);
+	const searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	return searchBox;
+}
+
 function gettingPosition(){
 	if(navigator.geolocation){
         return new Promise((resolve, reject) => {
@@ -27,7 +35,8 @@ function successCallback(map, position){
 		lng: position.coords.longitude, 
         lat: position.coords.latitude
 	};
-	addMarker(map, latlon, "您的位置", 0);
+	let marker = setMarker(map, latlon, "您的位置", 0);
+	setMarkerInfo(map, marker, "您的位置");
 	
 	map.setCenter(latlon); //定位到目前位置
     map.setZoom(16);
@@ -37,13 +46,16 @@ function errorCallback(error) {
     alert(error.message); //error.code
 }
 
-function addMarker(map, latlon, title, index) {
+function setMarker(map, latlon, title, index) {
+	let icon =  isNaN(index)? index : markerImg[index];
+		
 	var marker = new google.maps.Marker({
 	    position: latlon,
 	    map,
 	    title: title.toString(),
-		icon: markerImg[index],
+		icon: icon,
   	});
+	//marker.setAnimation(google.maps.Animation.BOUNCE);
 	return marker;
 }
 

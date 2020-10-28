@@ -44,13 +44,14 @@ function initMap() {
 			lng: marker.LONGITUDE, 
 	        lat: marker.LATITUDE
 		};
-		let resultMark = addMarker(map, latlon, marker.SN, 1);
+		let resultMark = setMarker(map, latlon, marker.SN, 1);
 		let infoMsg = "<div align='left'><b>名稱："+ marker.NAME +"</div>";
 		setMarkerInfo(map, resultMark, infoMsg)
 	});
-	
+	var content;
 	markers.forEach(marker => {
-		$('.list-group').append("<a class='list-group-item list-group-item-action' href='"+ marker.URL +"' target='_blank'>"+ marker.NAME +"<br>"+ marker.COMMENT +"</a>");
+		content = "名稱："+ marker.NAME +"<br>"+ marker.COMMENT;
+		$('.list-group').append("<a class='list-group-item list-group-item-action' href='"+ marker.URL +"' target='_blank'>"+ content +"</a>");
 	});
 	
 }

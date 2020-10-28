@@ -24,7 +24,6 @@ public class MarkerService {
 	@Autowired
 	private MarkerDao markerDao;
 	
-	
 	public ResponseEntity<?> getMarker(HttpDataTransferObject reqHDTO) {
 		Map<String, Object> resp = new HashMap<>();
 		
@@ -36,23 +35,21 @@ public class MarkerService {
 	}
 	
 	public ResponseEntity<?> queryAllMarker(HttpDataTransferObject reqHDTO) {
-		Map<String, Object> resp = new HashMap<>();
-		
 		List<MarkerPojo> markers = markerDao.findAll();
 		
+		Map<String, Object> resp = new HashMap<>();
 		resp.put("MARKERS", markers);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 	
-	public ResponseEntity<?> addMarker(HttpDataTransferObject reqHDTO) {
-		Map<String, Object> resp = new HashMap<>();
-		
+	public ResponseEntity<?> addMarker(HttpDataTransferObject reqHDTO) {		
 		MarkerPojo marker = httpDataTransferUtil.getDataBean(reqHDTO, "", MarkerPojo.class);
 		
 		//新增 點位資料
 		MarkerPojo pojo = markerDao.addMarker(marker);
 		log.info(pojo.toString());
 
+		Map<String, Object> resp = new HashMap<>();
 		resp.put("MARKER", pojo);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}

@@ -9,12 +9,19 @@
     
 	<style type="text/css">
 		#map {
-		  height: 100%;
+		  	height: 100%;
 		}
 		html, body {
-		  height: 100%;
-		  margin: 0;
-		  padding: 0;
+		  	height: 100%;
+		  	margin: 0;
+		  	padding: 0;
+		}
+		#searchbox-input {
+		  	background-color: #fff;
+		  	font-size: 18px;
+		  	margin-left: 10px;
+		  	margin-top: 10px;
+	  		width: 70%;
 		}
 	</style>
     <!-- 掛載CSS樣式 -->
@@ -60,11 +67,11 @@
 			          		<span>地點管理</span>
 			        	</a>
 			        	<div id="markerAction" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-				          	<div class="bg-white py-2 collapse-inner rounded">
+				          	<div class="bg-warning py-2 collapse-inner rounded">
 				            	<h6 class="collapse-header">地點管理</h6>
 				            	<hr class="sidebar-divider my-0">
-				            	<a class="collapse-item" href="backendControll01.html">新增地點</a>
-				            	<a class="collapse-item" href="backendControll02.html">修改地點</a>
+				            	<a class="collapse-item" href="backendControll01.html">1. 新增地點</a>
+				            	<a class="collapse-item" href="backendControll02.html">2. 修改地點</a>
 				          	</div>
 			        	</div>
 			      	</li>
@@ -87,36 +94,41 @@
 		                	<div class="card">
 								<div class="card-header"><i class="fas fa-map-marker-alt"></i>&nbsp;新增地點</div>
 				  				<div class="card-body" style="height:65vh">
+				  					<form id="markerForm" onsubmit="return false;" method="POST">
 				            		<div class="row">
 				            			<div class="col-sm-6 col-xs-12">
-											<label for="usr">名稱:</label>
-										  	<input type="text" class="form-control" id="usr">
+											<label for="name">名稱:</label>
+										  	<input type="text" class="form-control" id="NAME">
 										</div>
 										<div class="col-sm-6 col-xs-12">
-										  	<label for="pwd">地址:</label>
-										  	<input type="password" class="form-control" id="pwd">
+										  	<label for="address">地址:</label>
+										  	<button type="button" class="btn btn-warning btn-sm text-white">
+										  		<i class="far fa-image"></i>&nbsp;搜尋
+										  	</button>
+										  	<input type="text" class="form-control" id="ADDRESS">
 										</div>
 									</div>
 									<div class="row">
 				            			<div class="col-sm-6 col-xs-12">
-											<label for="usr">經度:</label>
-										  	<input type="text" class="form-control" id="usr">
+											<label for="longitude">經度:</label>
+										  	<input type="text" class="form-control" id="LONGITUDE">
 										</div>
 										<div class="col-sm-6 col-xs-12">
-										  	<label for="pwd">緯度:</label>
-										  	<input type="password" class="form-control" id="pwd">
+										  	<label for="latitude">緯度:</label>
+										  	<input type="text" class="form-control" id="LATITUDE">
 										</div>
 									</div>
 									<div class="row">
 				            			<div class="col-sm-6 col-xs-12">
-											<label for="usr">備註:</label>
-										  	<input type="text" class="form-control" id="usr">
+											<label for="comment">備註:</label>
+										  	<input type="text" class="form-control" id="COMMENT">
 										</div>
 										<div class="col-sm-6 col-xs-12">
-										  	<label for="pwd">網址:</label>
-										  	<input type="password" class="form-control" id="pwd">
+										  	<label for="url">網址:</label>
+										  	<input type="text" class="form-control" id="URL">
 										</div>
 									</div>
+									</form>
 									<br>
 									<button type="button" class="btn btn-primary btn-block" id="addMarker">新增</button>
 								</div>
@@ -126,6 +138,7 @@
 							<div class="card">
 								<div class="card-header"><i class="far fa-image"></i>&nbsp;地圖管理</div>
 				  				<div class="card-body" style="height:65vh">
+				  					<input id="searchbox-input" class="controls" type="text" placeholder="搜尋 Google 地圖" />
 									<div id="map"></div>
 								</div>
 							</div>
@@ -140,12 +153,13 @@
 	    <script src="/webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	    <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 	    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfZ2PYiFvklzzV-bN7K8hF6gTVTCNn7E" defer></script>
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfZ2PYiFvklzzV-bN7K8hF6gTVTCNn7E&libraries=places&" defer></script>
 	    
 	    <script src="/webjars/font-awesome/5.15.1/js/all.js " data-auto-replace-svg="nest"></script>
 	    
 	    <script src="./js/util/ajax.js"></script>
 	    <script src="./js/util/mapUtil.js"></script>
+	    <script src="./js/util/formProcess.js"></script>
 	    <script src="./js/backendControll01.js"></script>
 </body>
 	
