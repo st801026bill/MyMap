@@ -17,11 +17,10 @@
 		  	padding: 0;
 		}
 		#searchbox-input {
-		  	background-color: #fff;
-		  	font-size: 18px;
+		  	font-size: 15px;
 		  	margin-left: 10px;
 		  	margin-top: 10px;
-	  		width: 70%;
+	  		width: 80%;
 		}
 	</style>
     <!-- 掛載CSS樣式 -->
@@ -101,10 +100,19 @@
 										  	<input type="text" class="form-control" id="NAME">
 										</div>
 										<div class="col-sm-6 col-xs-12">
-										  	<label for="address">地址:</label>
-										  	<button type="button" class="btn btn-warning btn-sm text-white">
-										  		<i class="far fa-image"></i>&nbsp;搜尋
-										  	</button>
+											<label for="address">分類:</label>
+										  	<select class="form-control" id="KIND">
+										    	<option value="T1">台灣 - 北部</option>
+											    <option value="T2">台灣 - 中部</option>
+											    <option value="T3">台灣 - 南部</option>
+											    <option value="T4">台灣 - 東部</option>
+											    <option value="T5">台灣 - 外島</option>
+										  	</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<label for="address">地址:</label>
 										  	<input type="text" class="form-control" id="ADDRESS">
 										</div>
 									</div>
@@ -138,7 +146,7 @@
 							<div class="card">
 								<div class="card-header"><i class="far fa-image"></i>&nbsp;地圖管理</div>
 				  				<div class="card-body" style="height:65vh">
-				  					<input id="searchbox-input" class="controls" type="text" placeholder="搜尋 Google 地圖" />
+				  					<input id="searchbox-input" class="form-control" type="text" placeholder="搜尋 Google 地圖" />
 									<div id="map"></div>
 								</div>
 							</div>

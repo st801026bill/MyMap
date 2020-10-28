@@ -55,7 +55,6 @@ function setMarker(map, latlon, title, index) {
 	    title: title.toString(),
 		icon: icon,
   	});
-	//marker.setAnimation(google.maps.Animation.BOUNCE);
 	return marker;
 }
 

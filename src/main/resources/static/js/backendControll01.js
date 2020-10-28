@@ -4,6 +4,7 @@ let markers = [];
 $(document).ready(function(){
 	init();
 	initMap();
+	initMapEvent();
 	initButton();
 });
 
@@ -18,7 +19,7 @@ function init() {
      		$("#wrapper").removeClass("toggled");
    		}else{
      		$("#wrapper").addClass("toggled");
-   	}
+   		}
  	});
 }
 
@@ -47,7 +48,7 @@ function initMap() {
         streetViewControl: false,
         streetViewControlOptions: {
             position: google.maps.ControlPosition.TOP_RIGHT
-        } 
+        }
     };
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	
@@ -57,15 +58,7 @@ function initMap() {
 		.catch(error => errorCallback(error));
 }
 
-function initButton() {
-	$('#addMarker').click(function() {
-		var data = {};
-		data.DATA=getAllValueByForm("markerForm");
-		var jsonData = JSON.stringify(data);
-		var result = sendRequest("POST", "application/json", "/marker/add", jsonData, "json", null);
-		alert(result);
-	});
-	
+function initMapEvent() {
 	//搜尋方塊
 	let searchBox = initSearchBox("searchbox-input");
 	searchBox.addListener("places_changed", () => {
@@ -92,11 +85,13 @@ function initButton() {
 	        	anchor: new google.maps.Point(17, 34),
 	        	scaledSize: new google.maps.Size(25, 25),
 	      	};
+			
 	      	// Create a marker for each place.
-	      	markers.push(
-				setMarker(map, place.geometry.location, place.name, 1)
-        	);
-	
+			let marker = setMarker(map, place.geometry.location, place.name, 1);
+			setMarkerInfo(map, marker, place.name);
+			marker.formatted_address = place.formatted_address;
+	      	markers.push(marker);
+
 	      	if (place.geometry.viewport) {
 	        	// Only geocodes have viewport.
 	        	bounds.union(place.geometry.viewport);
@@ -105,13 +100,55 @@ function initButton() {
 	      	}
 	    });
 	    map.fitBounds(bounds);
+		
+		setMarkersEvent();
+		
 		if(markers.length === 1) {
+			$('#NAME').val(markers[0].title);
+			$('#ADDRESS').val(markers[0].formatted_address);
 			$('#LONGITUDE').val(markers[0].position.lng);
 			$('#LATITUDE').val(markers[0].position.lat);
 		} else {
+			$('#NAME').val("");
+			$('#ADDRESS').val("");
 			$('#LONGITUDE').val("");
 			$('#LATITUDE').val("");
 		}
+	});
+}
+
+function initButton() {
+	$('#addMarker').click(function() {
+		var data = {};
+		data.DATA=getAllValueByForm("markerForm");
+		var jsonData = JSON.stringify(data);
+		var result = sendRequest("POST", "application/json", "/marker/add", jsonData, "json", null);
+		alert(result);
+	});
+}
+
+function setMarkersEvent() {
+	markers.forEach((marker) => {
+		marker.addListener('click',function(){
+			map.setCenter(marker.getPosition());
+			
+			$('#NAME').val(marker.title);
+			$('#ADDRESS').val(marker.formatted_address);
+			$('#LONGITUDE').val(marker.position.lng);
+			$('#LATITUDE').val(marker.position.lat);
+			
+			marker.setAnimation(google.maps.Animation.BOUNCE);
+			marker.setDraggable(true);
+			google.maps.event.addListener(marker, 'dragend', function() {
+		        $('#NAME').val(marker.title);
+				$('#ADDRESS').val(marker.formatted_address);
+				$('#LONGITUDE').val(marker.position.lng);
+				$('#LATITUDE').val(marker.position.lat);
+				
+				marker.setAnimation(null);
+				marker.setDraggable(false);
+	      	});
+		});
 	});
 }
 
