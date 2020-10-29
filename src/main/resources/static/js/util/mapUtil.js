@@ -5,15 +5,22 @@ const markerImg = [
 ];
 
 let lastInfo = null;
+let geocoder;
+let markers = [];
 
+//建立SearchBox
 function initSearchBox(searchBoxId) {
-	//建立SearchBox
 	const input = document.getElementById(searchBoxId);
 	const searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 	return searchBox;
 }
 
+function initGeocoder() {
+	geocoder = new google.maps.Geocoder();
+}
+
+//取得使用者位置
 function gettingPosition(){
 	if(navigator.geolocation){
         return new Promise((resolve, reject) => {
@@ -46,6 +53,23 @@ function errorCallback(error) {
     alert(error.message); //error.code
 }
 
+function geocoderAddress(address) {
+	let resultMarker;
+	geocoder.geocode( { 'address': address}, function(results, status) {
+    	if (status == 'OK') {
+	      	map.setCenter(results[0].geometry.location);
+			resultMarker = setMarker(map, results[0].geometry.location, address, 2);
+			setMarkerInfo(map, resultMarker, address);
+			resultMarker.formatted_address = address;
+			
+			if(!resultMarker) return;
+			clearMarkersArray();
+			pushMarkersArray(resultMarker);
+			setMarkersEvent();
+    	}
+  	});
+}
+
 function setMarker(map, latlon, title, index) {
 	let icon =  isNaN(index)? index : markerImg[index];
 		
@@ -59,6 +83,8 @@ function setMarker(map, latlon, title, index) {
 }
 
 function setMarkerInfo(map, marker, infoMsg) {
+	if(!map || !marker) return;
+	
 	var info = new google.maps.InfoWindow({
         content: infoMsg
     });
@@ -68,3 +94,19 @@ function setMarkerInfo(map, marker, infoMsg) {
 		lastInfo = info;
     });
 }
+
+// Clear out the old markers.
+function clearMarkersArray () {
+	if(!markers) return;
+	
+    markers.forEach((marker) => {
+      	marker.setMap(null);
+    });
+    markers = [];  
+}
+
+function pushMarkersArray(marker) {
+	markers.push(marker);
+}
+
+function getMarkers() { return markers }

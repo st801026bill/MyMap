@@ -25,6 +25,8 @@ public class MarkerPojo implements BasePojo {
 	private Integer sn;
 	@JsonProperty(value = "NAME")
 	private String name;
+	@JsonProperty(value = "KIND")
+	private String kind;
 	@JsonProperty(value = "ADDRESS")
 	private String address;
 	@JsonProperty(value = "LONGITUDE")

@@ -49,7 +49,8 @@
 		<div id="wrapper" class="toggled">
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
+               	<!--
+               	<ul class="sidebar-nav">
                 	<li class="sidebar-brand"> <a href="#"> 地點 </a> </li>
                 	<li> <a class="nav-link" href="">全部</a></li>
                 	<li> <a class="nav-link" href="">台灣 - 北部</a></li>
@@ -58,7 +59,47 @@
                 	<li> <a class="nav-link" href="">台灣 - 東部</a></li>
                 	<li> <a class="nav-link" href="">台灣 - 外島</a></li>
                	</ul>
-            </div> <!-- /#sidebar-wrapper -->
+               	-->
+               	<ul class="sidebar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                	<li class="sidebar-brand"> <a href="#">地圖管理</a></li>
+                	<li class="nav-item">
+	                	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#AllCountry" aria-expanded="true" aria-controls="AllCountry">
+			          		<i class="fas fa-map-marker-alt"></i>&nbsp;
+			          		<span>全部</span>
+			        	</a>
+			        	<div id="AllCountry" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				          	<div class="bg-info py-2 collapse-inner rounded">
+				            	<h6 class="collapse-header">全部</h6>
+				            	<hr class="sidebar-divider my-0">
+				            	<a class="collapse-item" href="">0. 全部</a>
+				            	<a class="collapse-item" href="">1. 台灣</a>
+				            	<a class="collapse-item" href="">2. 日本</a>
+				            	<a class="collapse-item" href="">3. 澳洲</a>
+				          	</div>
+			        	</div>
+		        	</li>
+		        	<li class="nav-item">
+			        	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Taiwan" aria-expanded="true" aria-controls="Taiwan">
+			          		<i class="fas fa-map-marker-alt"></i>&nbsp;
+			          		<span>台灣</span>
+			        	</a>
+			        	<div id="Taiwan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				          	<div class="bg-info py-2 collapse-inner rounded">
+				            	<h6 class="collapse-header">台灣</h6>
+				            	<hr class="sidebar-divider my-0">
+				            	<a class="collapse-item" href="">0. 全部</a>
+				            	<a class="collapse-item" href="">1. 台灣 - 北部</a>
+				            	<a class="collapse-item" href="">2. 台灣 - 中部</a>
+				            	<a class="collapse-item" href="">3. 台灣 - 南部</a>
+				            	<a class="collapse-item" href="">4. 台灣 - 東部</a>
+				            	<a class="collapse-item" href="">5. 台灣 - 外島</a>
+				          	</div>
+			        	</div>
+		        	</li>
+               	</ul>
+            </div> 
+            <!-- /#sidebar-wrapper -->
+            
             <!-- Page Content -->
             <div id="page-content-wrapper">
             	<div class="container-fluid">

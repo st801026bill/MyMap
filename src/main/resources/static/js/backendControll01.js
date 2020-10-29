@@ -1,5 +1,4 @@
 let map;
-let markers = [];
 
 $(document).ready(function(){
 	init();
@@ -65,11 +64,9 @@ function initMapEvent() {
 		const places = searchBox.getPlaces();
 		
 		if (places.length == 0) return;
+		
 		// Clear out the old markers.
-	    markers.forEach((marker) => {
-	      	marker.setMap(null);
-	    });
-	    markers = [];     	
+	    clearMarkersArray();
 		
 		// For each place, get the icon, name and location.
 	    const bounds = new google.maps.LatLngBounds();
@@ -90,7 +87,7 @@ function initMapEvent() {
 			let marker = setMarker(map, place.geometry.location, place.name, 1);
 			setMarkerInfo(map, marker, place.name);
 			marker.formatted_address = place.formatted_address;
-	      	markers.push(marker);
+			pushMarkersArray(marker);
 
 	      	if (place.geometry.viewport) {
 	        	// Only geocodes have viewport.
@@ -100,34 +97,48 @@ function initMapEvent() {
 	      	}
 	    });
 	    map.fitBounds(bounds);
-		
 		setMarkersEvent();
-		
-		if(markers.length === 1) {
-			$('#NAME').val(markers[0].title);
-			$('#ADDRESS').val(markers[0].formatted_address);
-			$('#LONGITUDE').val(markers[0].position.lng);
-			$('#LATITUDE').val(markers[0].position.lat);
-		} else {
-			$('#NAME').val("");
-			$('#ADDRESS').val("");
-			$('#LONGITUDE').val("");
-			$('#LATITUDE').val("");
-		}
+		setMarkerDetail();
 	});
+	
+	//初始化地址搜尋元件
+	initGeocoder();
 }
 
 function initButton() {
-	$('#addMarker').click(function() {
+	$('#addMarker').bind("click", function() {
 		var data = {};
 		data.DATA=getAllValueByForm("markerForm");
 		var jsonData = JSON.stringify(data);
 		var result = sendRequest("POST", "application/json", "/marker/add", jsonData, "json", null);
 		alert(result);
 	});
+	
+	$('#searchAddress').bind("click", function() {
+		geocoderAddress($('#ADDRESS').val());
+		setMarkerDetail();
+	});
 }
 
+function setMarkerDetail() {
+	let markers = getMarkers();
+	if(markers.length === 1) {
+		$('#NAME').val(markers[0].title);
+		$('#ADDRESS').val(markers[0].formatted_address);
+		//$('#LONGITUDE').val(markers[0].position.lng);
+		//$('#LATITUDE').val(markers[0].position.lat);
+	} else {
+		$('#NAME').val("");
+		$('#ADDRESS').val("");
+		$('#LONGITUDE').val("");
+		$('#LATITUDE').val("");
+	}	
+}
+
+
 function setMarkersEvent() {
+	let markers = getMarkers();
+	
 	markers.forEach((marker) => {
 		marker.addListener('click',function(){
 			map.setCenter(marker.getPosition());
@@ -151,4 +162,3 @@ function setMarkersEvent() {
 		});
 	});
 }
-

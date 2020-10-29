@@ -66,7 +66,7 @@
 			          		<span>地點管理</span>
 			        	</a>
 			        	<div id="markerAction" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-				          	<div class="bg-warning py-2 collapse-inner rounded">
+				          	<div class="bg-info py-2 collapse-inner rounded">
 				            	<h6 class="collapse-header">地點管理</h6>
 				            	<hr class="sidebar-divider my-0">
 				            	<a class="collapse-item" href="backendControll01.html">1. 新增地點</a>
@@ -75,8 +75,7 @@
 			        	</div>
 			      	</li>
                	</ul>
-            </div><!-- /#sidebar-wrapper -->
-            <!-- Sidebar -->         
+            </div><!-- /#sidebar-wrapper -->       
             
             <!-- Page Content -->
             <div id="page-content-wrapper">
@@ -96,12 +95,13 @@
 				  					<form id="markerForm" onsubmit="return false;" method="POST">
 				            		<div class="row">
 				            			<div class="col-sm-6 col-xs-12">
-											<label for="name">名稱:</label>
+											<label for="NAME">名稱:</label>
 										  	<input type="text" class="form-control" id="NAME">
 										</div>
 										<div class="col-sm-6 col-xs-12">
-											<label for="address">分類:</label>
+											<label for="KIND">分類:</label>
 										  	<select class="form-control" id="KIND">
+										  		<option value="">請選擇...</option>
 										    	<option value="T1">台灣 - 北部</option>
 											    <option value="T2">台灣 - 中部</option>
 											    <option value="T3">台灣 - 南部</option>
@@ -112,27 +112,30 @@
 									</div>
 									<div class="row">
 										<div class="col-12">
-											<label for="address">地址:</label>
+											<label for="ADDRESS">地址:</label>
+											<button type="button" class="btn btn-success btn-sm" id="searchAddress">
+												<i class="fa fa-search"></i>&nbsp;搜尋
+											</button>
 										  	<input type="text" class="form-control" id="ADDRESS">
 										</div>
 									</div>
 									<div class="row">
 				            			<div class="col-sm-6 col-xs-12">
-											<label for="longitude">經度:</label>
+											<label for="LONGITUDE">經度:</label>
 										  	<input type="text" class="form-control" id="LONGITUDE">
 										</div>
 										<div class="col-sm-6 col-xs-12">
-										  	<label for="latitude">緯度:</label>
+										  	<label for="LATITUDE">緯度:</label>
 										  	<input type="text" class="form-control" id="LATITUDE">
 										</div>
 									</div>
 									<div class="row">
 				            			<div class="col-sm-6 col-xs-12">
-											<label for="comment">備註:</label>
+											<label for="COMMENT">備註:</label>
 										  	<input type="text" class="form-control" id="COMMENT">
 										</div>
 										<div class="col-sm-6 col-xs-12">
-										  	<label for="url">網址:</label>
+										  	<label for="URL">網址:</label>
 										  	<input type="text" class="form-control" id="URL">
 										</div>
 									</div>

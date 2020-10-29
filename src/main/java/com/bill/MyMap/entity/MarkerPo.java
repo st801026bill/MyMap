@@ -32,9 +32,10 @@ public class MarkerPo implements BasePo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "SN", nullable = false)
 	private Integer sn;
-	
 	@Column(name = "NAME", length = 32, nullable = false)
 	private String name;
+	@Column(name = "KIND", length = 5, nullable = false)
+	private String kind;
 	@Column(name = "ADDRESS", length = 128, nullable = false)
 	private String address;
 	@JsonProperty(value = "LONGITUDE")
