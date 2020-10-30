@@ -80,33 +80,28 @@
             <!-- Page Content -->
             <div id="page-content-wrapper">
             	<div class="container-fluid">
-            		<nav aria-label="breadcrumb">
-	                    <ol class="breadcrumb">
-	                        <li class="breadcrumb-item">後台管理</li>
-	                        <li class="breadcrumb-item">地點管理</li>
-	                        <li class="breadcrumb-item active" aria-current="page">新增地點</li>
-	                    </ol>
-                	</nav>
                 	<div class="row">
-                		<div class="col-sm-6">
+                		<div class="col-md-6">
 		                	<div class="card">
 								<div class="card-header"><i class="fas fa-map-marker-alt"></i>&nbsp;新增地點</div>
-				  				<div class="card-body" style="height:65vh">
+				  				<div class="card-body" style="height:76vh">
 				  					<form id="markerForm" onsubmit="return false;" method="POST">
 				            		<div class="row">
-				            			<div class="col-sm-6 col-xs-12">
+				            			<div class="col-12">
 											<label for="NAME">名稱:</label>
 										  	<input type="text" class="form-control" id="NAME">
 										</div>
-										<div class="col-sm-3 col-xs-12">
+									</div>
+									<div class="row">
+										<div class="col-6">
 											<label>分類:</label>
 										  	<select class="form-control" id="COUNTRY_ID"></select>
 									  	</div>
-									  	<div class="col-sm-3 col-xs-12">
-									  		<label>　</label>
-										  	<select class="form-control" id="CITY_ID"></select>
-										</div>
-									</div>
+									  	<div class="col-6">
+											<label>　</label>
+									  		<select class="form-control" id="CITY_ID"></select>
+									  	</div>
+								  	</div>
 									<div class="row">
 										<div class="col-12">
 											<label for="ADDRESS">地址:</label>
@@ -142,7 +137,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-md-6">
+							<nav aria-label="breadcrumb">
+			                    <ol class="breadcrumb">
+			                        <li class="breadcrumb-item">後台管理</li>
+			                        <li class="breadcrumb-item">地點管理</li>
+			                        <li class="breadcrumb-item active" aria-current="page">新增地點</li>
+			                    </ol>
+		                	</nav>
 							<div class="card">
 								<div class="card-header"><i class="far fa-image"></i>&nbsp;地圖管理</div>
 				  				<div class="card-body" style="height:65vh">
