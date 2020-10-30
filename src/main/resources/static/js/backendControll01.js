@@ -24,6 +24,9 @@ function initView() {
      		$("#wrapper").addClass("toggled");
    		}
  	});
+	
+	//設定分類DDL
+	setKindDDL("");
 }
 
 
@@ -122,6 +125,10 @@ function initButton() {
 		geocoderAddress($('#ADDRESS').val());
 		setMarkerDetail();
 	});
+	
+	$('#COUNTRY_ID').unbind("change").bind("change", function(){
+		setKindDDL($(this).val());
+	});
 }
 
 function setMarkerDetail() {
@@ -165,4 +172,30 @@ function setMarkersEvent() {
 	      	});
 		});
 	});
+}
+
+function setKindDDL(countryId) {
+	//設定分類DDL
+	var data = {};
+	data.DATA = {};
+	data.DATA.COUNTRY_ID = countryId;
+	let jsonData = JSON.stringify(data);
+	let result = sendRequest("POST", "application/json", "/marker/kindDDL", jsonData, "json", null);
+	let resultDDL = result.DATA.KIND;
+	
+	if(countryId === "") {
+		$('#COUNTRY_ID').empty();
+		$('#COUNTRY_ID').append("<option value=''>請選擇...</option>");
+		resultDDL.forEach(kind => {
+			$('#COUNTRY_ID').append("<option value='"+ kind.COUNTRY_ID +"'>"+ kind.COUNTRY_NAME +"</option>");
+		});
+		$('#CITY_ID').empty();
+		$('#CITY_ID').append("<option value=''>請選擇...</option>");
+	} else {
+		$('#CITY_ID').empty();
+		$('#CITY_ID').append("<option value=''>請選擇...</option>");
+		resultDDL.forEach(kind => {
+			$('#CITY_ID').append("<option value='"+ kind.CITY_ID +"'>"+ kind.CITY_NAME +"</option>");
+		});
+	}
 }

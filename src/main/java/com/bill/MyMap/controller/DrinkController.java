@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bill.MyMap.model.HttpDataTransferObject;
 import com.bill.MyMap.service.DrinkService;
-import com.bill.MyMap.service.MarkerService;
+import com.bill.MyMap.service.MapService;
 
 import lombok.extern.slf4j.Slf4j;
 

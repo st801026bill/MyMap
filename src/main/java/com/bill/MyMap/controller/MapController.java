@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bill.MyMap.model.HttpDataTransferObject;
-import com.bill.MyMap.service.MarkerService;
+import com.bill.MyMap.service.MapService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 @RequestMapping("/marker")
-public class MarkerController {
+public class MapController {
 	@Autowired
-	private MarkerService markerService;
+	private MapService mapService;
 	
 	@RequestMapping(value="/query",
 			method = RequestMethod.POST,
@@ -26,7 +26,7 @@ public class MarkerController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> queryMarker(@RequestBody HttpDataTransferObject reqHDTO) {
 		log.info("Got Request body:{}", reqHDTO);
-		return markerService.getMarker(reqHDTO);
+		return mapService.getMarker(reqHDTO);
 	}
 	
 	@RequestMapping(value="/queryAll",
@@ -35,7 +35,7 @@ public class MarkerController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> queryAllMarker(@RequestBody HttpDataTransferObject reqHDTO) {
 		log.info("Got Request body:{}", reqHDTO);
-		return markerService.queryAllMarker(reqHDTO);
+		return mapService.queryAllMarker(reqHDTO);
 	}
 	
 	@RequestMapping(value="/add",
@@ -44,7 +44,7 @@ public class MarkerController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addMarker(@RequestBody HttpDataTransferObject reqHDTO) {
 		log.info("Got Request body:{}", reqHDTO);
-		return markerService.addMarker(reqHDTO);
+		return mapService.addMarker(reqHDTO);
 	}
 	
 	@RequestMapping(value="/queryByKind",
@@ -53,6 +53,15 @@ public class MarkerController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> queryByKind(@RequestBody HttpDataTransferObject reqHDTO) {
 		log.info("Got Request body:{}", reqHDTO);
-		return markerService.queryByKind(reqHDTO);
+		return mapService.queryByKind(reqHDTO);
+	}
+	
+	@RequestMapping(value="/kindDDL",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> queryMarkerKindDDL(@RequestBody HttpDataTransferObject reqHDTO) {
+		log.info("Got Request body:{}", reqHDTO);
+		return mapService.queryMarkerKindDDL(reqHDTO);
 	}
 }

@@ -1,7 +1,9 @@
 package com.bill.MyMap.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -195,5 +197,50 @@ public class PojoUtil {
 		}
 		
 		return pos;
+	}
+	
+	/**
+	 * <pre>
+	 * 將Pojo轉換為Map
+	 * @param obj		Object
+	 * @param ignoreField	String...
+	 * @return map	Map<String, Object>
+	 */
+	public <T extends BasePojo> Map<String, Object> transBean2Map(T pojo, String... ignoreFields) {
+		if(null == pojo) {
+			return null;
+		}
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		List<String> ignoreFieldList = Arrays.asList(ignoreFields);
+		try {
+			map = jacksonMapper.convertValue(pojo, Map.class);
+			if(!ignoreFieldList.isEmpty()) {
+				for(String ignoreField: ignoreFieldList) {
+					map.remove(ignoreField);
+				}
+			}
+		} catch (Exception e) {
+			log.error("Pojo轉換Map Error", e);
+		}
+		return map;
+	}
+	
+	/**
+	 * <pre>
+	 * 將List<Pojo>轉換為List<Map>
+	 * @param <T>
+	 * @param pojoList	List
+	 * @param ignoreFields	String...
+	 * @return
+	 */
+	public <T extends BasePojo> List<Map<String, Object>> transBean2Map(List<T> pojoList, String... ignoreFields) {
+		List<Map<String, Object>> mapList = new ArrayList<>();
+		for(T pojo: pojoList) {
+			Map<String, Object> map = transBean2Map(pojo, ignoreFields);
+			if(null != map) {
+				mapList.add(map);
+			}
+		}
+		return mapList;
 	}
 }

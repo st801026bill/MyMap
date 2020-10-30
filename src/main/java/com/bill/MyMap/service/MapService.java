@@ -13,20 +13,25 @@ import org.springframework.stereotype.Service;
 import com.bill.MyMap.dao.MarkerDao;
 import com.bill.MyMap.dao.MarkerKindDao;
 import com.bill.MyMap.model.HttpDataTransferObject;
+import com.bill.MyMap.model.MarkerKindPojo;
 import com.bill.MyMap.model.MarkerPojo;
 import com.bill.MyMap.util.HttpDataTransferUtil;
+import com.bill.MyMap.util.PojoUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class MarkerService {
+public class MapService {
 	@Autowired
 	private HttpDataTransferUtil httpDataTransferUtil;
 	@Autowired
 	private MarkerDao markerDao;
 	@Autowired
 	private MarkerKindDao markerKindDao;
+	
+	@Autowired
+	PojoUtil pojoUtil;
 	
 	public ResponseEntity<?> getMarker(HttpDataTransferObject reqHDTO) {
 		Map<String, Object> resp = new HashMap<>();
@@ -72,6 +77,20 @@ public class MarkerService {
 		
 		Map<String, Object> resp = new HashMap<>();
 		resp.put("MARKERS", pojo);
+		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> queryMarkerKindDDL(HttpDataTransferObject reqHDTO) {
+		String countryID = httpDataTransferUtil.getTranrqUnderlyingType(reqHDTO, "COUNTRY_ID", String.class);
+		List<MarkerKindPojo> result;
+		if(StringUtils.equals(countryID, ""))
+			result = markerKindDao.findCountryDDL();
+		else
+			result = markerKindDao.findCityDDL(countryID);
+		
+		//List<Map<String, Object>> resp = pojoUtil.transBean2Map(result ,"");
+		Map<String, Object> resp = new HashMap();
+		resp.put("KIND", result);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 }

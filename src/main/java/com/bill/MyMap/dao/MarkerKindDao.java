@@ -1,6 +1,7 @@
 package com.bill.MyMap.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,13 @@ public class MarkerKindDao {
 
 	public List<MarkerKindPojo> findAll() {
 		return pojoUtil.transPo2Pojo(markerKindRepository.findAll());
+	}
+	
+	public List<MarkerKindPojo> findCountryDDL() {
+		return pojoUtil.transPo2Pojo(markerKindRepository.findCountryDDL());
+	}
+	
+	public List<MarkerKindPojo> findCityDDL(String countryId) {
+		return pojoUtil.transPo2Pojo(markerKindRepository.findByCountryIdIgnoreCase(countryId));
 	}
 }

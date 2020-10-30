@@ -55,8 +55,8 @@ function getAllValueByForm(formName){
 			if ( valNm.indexOf("請選擇") >= 0 ){
 				valNm = "";
 			}
-			console.log($(elms[i]).attr('id')+'NM');
-			returnObj[$(elms[i]).attr('id')+'NM'] = valNm;
+			console.log(($(elms[i]).attr('id')).replace("ID", "NAME"));
+			returnObj[($(elms[i]).attr('id')).replace("ID", "NAME")] = valNm;
 		}
 
 		elms = $(this).find("textarea");
