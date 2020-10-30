@@ -4,4 +4,4 @@
 後端: spring boot, spring jpa, h2 database  
 
 ![image](https://github.com/st801026bill/MyMap/blob/master/mymap.png)
-![image](https://github.com/st801026bill/MyMap/blob/master/addmarker.png)
+![image](https://github.com/st801026bill/MyMap/blob/master/addMarker.png)
