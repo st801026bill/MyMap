@@ -55,12 +55,17 @@ function initButton() {
 	});
 }
 
-function queryMarkers(countryId, cityId) {
+function queryMarkers(parentId, sonId) {	
 	//query markers
 	var data = {};
 	data.DATA={};
-	data.DATA.COUNTRY_ID=countryId;
-	data.DATA.CITY_ID=cityId;
+	
+	if(parentId === "AllCountry") {
+		parentId = sonId;
+		sonId = "A";
+	}
+	data.DATA.COUNTRY_ID=parentId;
+	data.DATA.CITY_ID=sonId;
 	var jsonData = JSON.stringify(data);
 	var result = sendRequest("POST", "application/json", "/marker/queryByKind", jsonData, "json", null);
 	resultMarkers = result.DATA.MARKERS;
