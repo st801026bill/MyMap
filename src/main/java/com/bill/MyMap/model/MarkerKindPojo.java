@@ -20,11 +20,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)		
-public class MarkerPojo implements BasePojo {
+public class MarkerKindPojo implements BasePojo {
 	@JsonProperty(value = "SN")
 	private Integer sn;
-	@JsonProperty(value = "NAME")
-	private String name;
 	@JsonProperty(value = "COUNTRY_ID")
 	private String countryId;
 	@JsonProperty(value = "COUNTRY_NAME")
@@ -33,14 +31,4 @@ public class MarkerPojo implements BasePojo {
 	private String cityId;
 	@JsonProperty(value = "CITY_NAME")
 	private String cityName;
-	@JsonProperty(value = "ADDRESS")
-	private String address;
-	@JsonProperty(value = "LONGITUDE")
-	private float longitude;
-	@JsonProperty(value = "LATITUDE")
-	private float latitude;
-	@JsonProperty(value = "COMMENT")
-	private String comment;
-	@JsonProperty(value = "URL")
-	private String url;
 }

@@ -2,12 +2,16 @@ let map;
 
 $(document).ready(function(){
 	init();
-	initMap();
-	initMapEvent();
-	initButton();
 });
 
 function init() {
+	initView();
+	initMap();
+	initMapEvent();
+	initButton();
+}
+
+function initView() {
 	$("#menu-toggle").click(function(e) {
      	e.preventDefault();
      	$("#wrapper").toggleClass("toggled");

@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.bill.MyMap.dao.MarkerDao;
+import com.bill.MyMap.dao.MarkerKindDao;
 import com.bill.MyMap.model.HttpDataTransferObject;
 import com.bill.MyMap.model.MarkerPojo;
 import com.bill.MyMap.util.HttpDataTransferUtil;
@@ -23,6 +25,8 @@ public class MarkerService {
 	private HttpDataTransferUtil httpDataTransferUtil;
 	@Autowired
 	private MarkerDao markerDao;
+	@Autowired
+	private MarkerKindDao markerKindDao;
 	
 	public ResponseEntity<?> getMarker(HttpDataTransferObject reqHDTO) {
 		Map<String, Object> resp = new HashMap<>();
@@ -51,6 +55,23 @@ public class MarkerService {
 
 		Map<String, Object> resp = new HashMap<>();
 		resp.put("MARKER", pojo);
+		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> queryByKind(HttpDataTransferObject reqHDTO) {		
+		String countryId = httpDataTransferUtil.getTranrqUnderlyingType(reqHDTO, "COUNTRY_ID", String.class);
+		String cityId = httpDataTransferUtil.getTranrqUnderlyingType(reqHDTO, "CITY_ID", String.class);
+		
+		List<MarkerPojo> pojo;
+		if(StringUtils.equals("A", countryId)) 
+			pojo = markerDao.findAll();
+		else if(!StringUtils.equals("A", countryId) && StringUtils.equals("A", cityId))
+			pojo = markerDao.findByCountryId(countryId);
+		else
+			pojo = markerDao.findByCountryIdAndCityId(countryId, cityId);
+		
+		Map<String, Object> resp = new HashMap<>();
+		resp.put("MARKERS", pojo);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 }

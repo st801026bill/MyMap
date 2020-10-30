@@ -46,4 +46,13 @@ public class MarkerController {
 		log.info("Got Request body:{}", reqHDTO);
 		return markerService.addMarker(reqHDTO);
 	}
+	
+	@RequestMapping(value="/queryByKind",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> queryByKind(@RequestBody HttpDataTransferObject reqHDTO) {
+		log.info("Got Request body:{}", reqHDTO);
+		return markerService.queryByKind(reqHDTO);
+	}
 }

@@ -34,36 +34,8 @@ function initMap() {
 	gettingPosition()
 		.then(position => successCallback(map, position))
 		.catch(error => errorCallback(error));
-	
-	//query all markers
-	var data = {};
-	data.DATA={};
-	var jsonData = JSON.stringify(data);
-	var result = sendRequest("POST", "application/json", "/marker/queryAll", jsonData, "json", null);
-	resultMarkers = result.DATA.MARKERS;
-	resultMarkers.forEach(marker => {
-		let latlon = {
-			lng: marker.LONGITUDE, 
-	        lat: marker.LATITUDE
-		};
-		let resultMark = setMarker(map, latlon, marker.SN, 1);
-		let infoMsg = "<div align='left'><b>名稱："+ marker.NAME +"</div>";
-		setMarkerInfo(map, resultMark, infoMsg)
-	});
-	
-	let content;
-	const bounds = new google.maps.LatLngBounds();
-	let latlon;
-	resultMarkers.forEach(marker => {
-		let latlon = {
-			lng: parseFloat(marker.LONGITUDE), 
-	        lat: parseFloat(marker.LATITUDE)
-		};
-		bounds.extend(latlon);
-		content = "名稱："+ marker.NAME +"<br>"+ marker.COMMENT;
-		$('.list-group').append("<a class='list-group-item list-group-item-action markerList' id='"+ marker.SN +"' target='_blank'>"+ content +"</a>");
-	});
-	map.fitBounds(bounds);
+		
+	queryMarkers("A", "A");
 }
 
 function initButton() {
@@ -77,5 +49,51 @@ function initButton() {
 		map.panTo(latlon);
 		map.setZoom(15);
 	});
+	
+	$('.markerKindList a').unbind("click").bind("click", function() {
+		queryMarkers($(this).closest('.markerKindList').attr('id'), this.id);
+	});
+}
+
+function queryMarkers(countryId, cityId) {
+	//query markers
+	var data = {};
+	data.DATA={};
+	data.DATA.COUNTRY_ID=countryId;
+	data.DATA.CITY_ID=cityId;
+	var jsonData = JSON.stringify(data);
+	var result = sendRequest("POST", "application/json", "/marker/queryByKind", jsonData, "json", null);
+	resultMarkers = result.DATA.MARKERS;
+	
+	clearMarkersArray();
+	resultMarkers.forEach(marker => {
+		let latlon = {
+			lng: marker.LONGITUDE, 
+	        lat: marker.LATITUDE
+		};
+		let resultMark = setMarker(map, latlon, marker.SN, 1);
+		let infoMsg = "<div align='left'><b>名稱："+ marker.NAME +"</div>";
+		setMarkerInfo(map, resultMark, infoMsg);
+		
+		pushMarkersArray(resultMark);
+	});
+	
+	let content;
+	const bounds = new google.maps.LatLngBounds();
+	let latlon;
+	
+	$('.list-group').empty();
+	resultMarkers.forEach(marker => {
+		let latlon = {
+			lng: parseFloat(marker.LONGITUDE), 
+	        lat: parseFloat(marker.LATITUDE)
+		};
+		bounds.extend(latlon);
+		content = "名稱："+ marker.NAME +"<br>"+ marker.COMMENT;
+		$('.list-group').append("<a class='list-group-item list-group-item-action markerList' id='"+ marker.SN +"' target='_blank'>"+ content +"</a>");
+	});
+	map.fitBounds(bounds);
+
+	initButton();
 }
 

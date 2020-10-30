@@ -24,6 +24,16 @@ public class MarkerDao {
 		MarkerPo po = markerRepository.findBySn(sn);
 		return pojoUtil.transPo2Pojo(po, "");
 	}
+	
+	public List<MarkerPojo> findByCountryId(String countryId) {
+		List<MarkerPo> pos = markerRepository.findByCountryIdIgnoreCase(countryId);
+		return pojoUtil.transPo2Pojo(pos, "");
+	}
+	
+	public List<MarkerPojo> findByCountryIdAndCityId(String countryId, String cityId) {
+		List<MarkerPo> po = markerRepository.findByCountryIdIgnoreCaseAndCityIdIgnoreCase(countryId, cityId);
+		return pojoUtil.transPo2Pojo(po, "");
+	}
 
 	public List<MarkerPojo> findAll() {
 		return pojoUtil.transPo2Pojo(markerRepository.findAll());
