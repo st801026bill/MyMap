@@ -8,6 +8,7 @@ function init() {
 	initView();
 	initMap();
 	initMapEvent();
+	initValidate();
 	initButton();
 }
 
@@ -112,8 +113,31 @@ function initMapEvent() {
 	initGeocoder();
 }
 
+function initValidate() {
+	$("#markerForm").validate({
+	    rules: {
+	      NAME:			"required",
+	      COUNTRY_ID:	"required",
+	      CITY_ID:		"required",
+	      ADDRESS:		"required",
+	      LONGITUDE:	"required",
+	      LATITUDE:		"required"
+	    },
+	    messages: {
+	      NAME: 		"請輸入必填欄位",
+	      COUNTRY_ID: 	"請輸入必填欄位",
+	      CITY_ID: 		"請輸入必填欄位",
+	      ADDRESS: 		"請輸入必填欄位",
+	      LONGITUDE: 	"請輸入必填欄位",
+	      LATITUDE: 	"請輸入必填欄位",
+    	}
+	});
+}
+
 function initButton() {
 	$('#addMarker').bind("click", function() {
+		if(!$("#markerForm").valid()) return;
+	
 		var data = {};
 		data.DATA=getAllValueByForm("markerForm");
 		var jsonData = JSON.stringify(data);

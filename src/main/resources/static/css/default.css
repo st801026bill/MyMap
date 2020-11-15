@@ -1,0 +1,17 @@
+label.error {
+	color:red;
+	font-size:13px;
+	font-weight:bold;
+}
+
+#map {
+  	height: 100%;
+}
+#searchbox-input {
+  	font-size: 15px;
+  	margin-left: 10px;
+  	margin-top: 10px;
+	width: 80%;
+}
+
+

@@ -8,19 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 	<style type="text/css">
-		#map {
-		  	height: 100%;
-		}
 		html, body {
 		  	height: 100%;
 		  	margin: 0;
 		  	padding: 0;
-		}
-		#searchbox-input {
-		  	font-size: 15px;
-		  	margin-left: 10px;
-		  	margin-top: 10px;
-	  		width: 80%;
 		}
 	</style>
     <!-- 掛載CSS樣式 -->
@@ -30,6 +21,7 @@
     <link rel="stylesheet" href="/webjars/font-awesome/5.15.1/css/fontawesome.min.css" />
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/default.css" 		rel="stylesheet">
 </head>
 <body>
     	<!--一、導覽列-->
@@ -88,37 +80,37 @@
 				  					<form id="markerForm" onsubmit="return false;" method="POST">
 				            		<div class="row">
 				            			<div class="col-12">
-											<label for="NAME">名稱:</label>
-										  	<input type="text" class="form-control" id="NAME">
+											<label class="Must" for="NAME">*名稱:</label>
+										  	<input type="text" class="form-control" id="NAME" name="NAME">
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-6">
-											<label>分類:</label>
-										  	<select class="form-control" id="COUNTRY_ID"></select>
+											<label>*分類:</label>
+										  	<select class="form-control" id="COUNTRY_ID" name="COUNTRY_ID"></select>
 									  	</div>
 									  	<div class="col-6">
 											<label>　</label>
-									  		<select class="form-control" id="CITY_ID"></select>
+									  		<select class="form-control" id="CITY_ID" name="CITY_ID"></select>
 									  	</div>
 								  	</div>
 									<div class="row">
 										<div class="col-12">
-											<label for="ADDRESS">地址:</label>
+											<label for="ADDRESS">*地址:</label>
 											<button type="button" class="btn btn-success btn-sm" id="searchAddress">
 												<i class="fa fa-search"></i>&nbsp;搜尋
 											</button>
-										  	<input type="text" class="form-control" id="ADDRESS">
+										  	<input type="text" class="form-control" id="ADDRESS" name="ADDRESS">
 										</div>
 									</div>
 									<div class="row">
 				            			<div class="col-sm-6 col-xs-12">
-											<label for="LONGITUDE">經度:</label>
-										  	<input type="text" class="form-control" id="LONGITUDE">
+											<label for="LONGITUDE">*經度:</label>
+										  	<input type="text" class="form-control" id="LONGITUDE" name="LONGITUDE" disabled>
 										</div>
 										<div class="col-sm-6 col-xs-12">
-										  	<label for="LATITUDE">緯度:</label>
-										  	<input type="text" class="form-control" id="LATITUDE">
+										  	<label for="LATITUDE">*緯度:</label>
+										  	<input type="text" class="form-control" id="LATITUDE" name="LATITUDE" disabled>
 										</div>
 									</div>
 									<div class="row">
@@ -165,7 +157,8 @@
 	    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfZ2PYiFvklzzV-bN7K8hF6gTVTCNn7E&libraries=places&" defer></script>
 	    
-	    <script src="/webjars/font-awesome/5.15.1/js/all.js " data-auto-replace-svg="nest"></script>
+	    <script src="/webjars/font-awesome/5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+	    <script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" data-auto-replace-svg="nest"></script>
 	    
 	    <script src="./js/util/ajax.js"></script>
 	    <script src="./js/util/mapUtil.js"></script>
