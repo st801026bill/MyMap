@@ -1,5 +1,7 @@
 package com.bill.MyMap.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,9 +47,9 @@ public class MarkerPo implements BasePo {
 	@Column(name = "ADDRESS", length = 128, nullable = false)
 	private String address;
 	@JsonProperty(value = "LONGITUDE")
-	private float longitude;
+	private BigDecimal longitude;
 	@JsonProperty(value = "LATITUDE")
-	private float latitude;
+	private BigDecimal latitude;
 	@Column(name = "COMMENT", length = 128, nullable = false)
 	private String comment;
 	@Column(name = "URL", length = 512, nullable = false)

@@ -1,7 +1,6 @@
 package com.bill.MyMap.model;
 
-import java.math.BigInteger;
-import java.util.Date;
+import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,9 +35,9 @@ public class MarkerPojo implements BasePojo {
 	@JsonProperty(value = "ADDRESS")
 	private String address;
 	@JsonProperty(value = "LONGITUDE")
-	private float longitude;
+	private BigDecimal longitude;
 	@JsonProperty(value = "LATITUDE")
-	private float latitude;
+	private BigDecimal latitude;
 	@JsonProperty(value = "COMMENT")
 	private String comment;
 	@JsonProperty(value = "URL")
