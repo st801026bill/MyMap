@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <title>我的地圖</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	<style type="text/css">
+		html, body {
+		  	height: 100%;
+		  	margin: 0;
+		  	padding: 0;
+		}
+	</style>
+    <!-- 掛載CSS樣式 -->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
+    <!-- font-awesome icon -->
+    <link rel="stylesheet" href="/webjars/font-awesome/5.15.1/css/fontawesome.min.css" />
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/default.css" 		rel="stylesheet">
+</head>
+<body>
+    	<!--一、導覽列-->
+    	<nav class="navbar navbar-expand navbar-dark bg-info fixed-top">
+    		<a href="#menu-toggle" id="menu-toggle" class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    		<div class="container-fluid">
+         		<a class="navbar-brand" href="#">我的地圖</a>   
+		  		<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#sidebar-wrapper">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+		  		<div class="collapse navbar-collapse">
+		    	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		      			<li class="nav-item">
+		        			<a class="nav-link" href="mymap.html">地圖管理</a>
+		      			</li>
+		      			<li class="nav-item active">
+		        			<a class="nav-link" href="backendControll01.html">後台管理<span class="sr-only">(current)</span></a>
+		      			</li>
+		    		</ul>
+		  		</div>
+		    </div>
+    	</nav>
+    	
+    	<div id="wrapper" class="toggled">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+            	<ul class="sidebar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <!-- <ul class="sidebar-nav  bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"> -->
+                	<li class="sidebar-brand"> <a href="#">後台管理</a></li>
+                	<!-- <li> <a class="nav-link" href="backendControll01.html"></a></li> -->
+			      	<li class="nav-item">
+			        	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#markerAction" aria-expanded="true" aria-controls="markerAction">
+			          		<i class="fas fa-map-marker-alt"></i>&nbsp;
+			          		<span>地點管理</span>
+			        	</a>
+			        	<div id="markerAction" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				          	<div class="bg-info py-2 collapse-inner rounded">
+				            	<h6 class="collapse-header">地點管理</h6>
+				            	<hr class="sidebar-divider my-0">
+				            	<a class="collapse-item" href="backendControll01.html">1. 新增地點</a>
+				            	<a class="collapse-item" href="backendControll02.html">2. 修改地點</a>
+				          	</div>
+			        	</div>
+			      	</li>
+               	</ul>
+            </div><!-- /#sidebar-wrapper -->       
+            
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+            	<div class="container-fluid">
+            		<div class="row">
+            			<div class="col-xl-2 col-lg-3 col-4 mt-2">
+		                    <!-- Sidebar -->
+				            <div id="sub-sidebar-wrapper" class="bg-dark" style="height:85vh">
+				               	<ul class="sidebar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+				                	<li class="sidebar-brand"> <a href="#">地圖管理</a></li>
+				                	<li class="nav-item">
+					                	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#AllCountry" aria-expanded="true" aria-controls="AllCountry">
+							          		<i class="fas fa-map-marker-alt"></i>&nbsp;
+							          		<span>全部</span>
+							        	</a>
+							        	<div id="AllCountry" class="collapse markerKindList" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+								          	<div class="bg-info py-2 collapse-inner rounded">
+								            	<h6 class="collapse-header">全部</h6>
+								            	<hr class="sidebar-divider my-0">
+								            	<a class="collapse-item" id="A">0. 全部</a>
+								            	<a class="collapse-item" id="TAIWAN">1. 台灣</a>
+								            	<a class="collapse-item" id="JAPAN">2. 日本</a>
+								            	<a class="collapse-item" id="AUSTRALIA">3. 澳洲</a>
+								          	</div>
+							        	</div>
+						        	</li>
+						        	<li class="nav-item">
+							        	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Taiwan" aria-expanded="true" aria-controls="Taiwan">
+							          		<i class="fas fa-map-marker-alt"></i>&nbsp;
+							          		<span>台灣</span>
+							        	</a>
+							        	<div id="Taiwan" class="collapse markerKindList" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+								          	<div class="bg-info py-2 collapse-inner rounded">
+								            	<h6 class="collapse-header">台灣</h6>
+								            	<hr class="sidebar-divider my-0">
+								            	<a class="collapse-item" id="A">0. 全部</a>
+								            	<a class="collapse-item" id="T1">1. 台灣 - 北部</a>
+								            	<a class="collapse-item" id="T2">2. 台灣 - 中部</a>
+								            	<a class="collapse-item" id="T3">3. 台灣 - 南部</a>
+								            	<a class="collapse-item" id="T4">4. 台灣 - 東部</a>
+								            	<a class="collapse-item" id="T5">5. 台灣 - 外島</a>
+								          	</div>
+							        	</div>
+						        	</li>
+				               	</ul>
+				            </div> 
+				            <!-- /#sub-sidebar-wrapper -->
+						</div>
+						<div class="col-xl-4 col-lg-9 col-8 mt-2">
+                            <div id="list-example" class="list-group" style="height:85vh; overflow-y:scroll"></div>
+	                    </div>
+            			<div class="col-xl-6 col-lg-12 col-12 mt-2">
+           					<nav aria-label="breadcrumb">
+			                    <ol class="breadcrumb">
+			                        <li class="breadcrumb-item">後台管理</li>
+			                        <li class="breadcrumb-item">地點管理</li>
+			                        <li class="breadcrumb-item active" aria-current="page">修改地點</li>
+			                    </ol>
+		                	</nav>
+	            			<div class="card">
+								<div class="card-header"><i class="far fa-image"></i>&nbsp;地圖管理</div>
+				  				<div class="card-body" style="height:70vh">
+									<div id="map"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div> <!-- /#page-content-wrapper -->
+        </div> <!-- /#wrapper -->
+    	
+	    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+	    <script type="text/javascript" charset="UTF-8" src="js/util/popper.min.js"></script>
+	    <script src="/webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	    <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+	    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfZ2PYiFvklzzV-bN7K8hF6gTVTCNn7E&libraries=places&" defer></script>
+	    
+	    <script src="/webjars/font-awesome/5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+	    <script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" data-auto-replace-svg="nest"></script>
+	    
+	    <script src="./js/util/ajax.js"></script>
+	    <script src="./js/util/mapUtil.js"></script>
+	    <script src="./js/backendControll02.js"></script>
+</body>
+	
+</html>
