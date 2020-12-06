@@ -30,6 +30,13 @@ create table MARKER_KIND (
     CITY_NAME 		varchar(64)
 );
 
+create table DRINKS_QUANTITY (
+	SN integer primary key auto_increment,
+    `NAME` 			varchar(128),
+    ID 				varchar(10),
+    QUANTITY		varchar(5)
+);
+
 insert into MARKER_KIND (COUNTRY_ID, COUNTRY_NAME, CITY_ID, CITY_NAME) values ('Taiwan','台灣','T1','北部');
 insert into MARKER_KIND (COUNTRY_ID, COUNTRY_NAME, CITY_ID, CITY_NAME) values ('Taiwan','台灣','T2','中部');
 insert into MARKER_KIND (COUNTRY_ID, COUNTRY_NAME, CITY_ID, CITY_NAME) values ('Taiwan','台灣','T3','南部');
