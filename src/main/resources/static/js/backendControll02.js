@@ -23,6 +23,22 @@ function initView() {
      		$("#wrapper").addClass("toggled");
    		}
  	});
+	
+	//initial dialog update marker
+	$("#dialog_update_marker").dialog({
+ 		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		modal: true,
+		
+		width: "60%",
+ 		show: "blind",
+	 	hide: "explode"
+		
+ 	});
+
+	//設定分類DDL
+	setKindDDL("");
 }
 
 function initMap() {
@@ -61,9 +77,12 @@ function queryMarkers(parentId, sonId) {
 			lng: marker.LONGITUDE, 
 	        lat: marker.LATITUDE
 		};
-		let resultMark = setMarker(map, latlon, marker.SN, 1);
-		let infoMsg = "<div align='left'><b>名稱："+ marker.NAME +"</div>";
-		setMarkerInfo(map, resultMark, infoMsg);
+		let resultMark = createMarker(map, latlon, marker.SN, 1);
+		
+		//add marker click event
+		resultMark.addListener('click',function(){
+			$("#dialog_update_marker").dialog("open");
+	  	});
 		
 		pushMarkersArray(resultMark);
 	});
@@ -102,52 +121,35 @@ function initButton() {
 	$('.markerKindList a').unbind("click").bind("click", function() {
 		queryMarkers($(this).closest('.markerKindList').attr('id'), this.id);
 	});
+	
+	$('#COUNTRY_ID').unbind("change").bind("change", function(){
+		setKindDDL($(this).val());
+	});
 }
 
-function queryMarkers(parentId, sonId) {	
-	//query markers
+function setKindDDL(countryId) {
+	//設定分類DDL
 	var data = {};
-	data.DATA={};
+	data.DATA = {};
+	data.DATA.COUNTRY_ID = countryId;
+	let jsonData = JSON.stringify(data);
+	let result = sendRequest("POST", "application/json", "/marker/kindDDL", jsonData, "json", null);
+	let resultDDL = result.DATA.KIND;
 	
-	if(parentId === "AllCountry") {
-		parentId = sonId;
-		sonId = "A";
+	if(countryId === "") {
+		$('#COUNTRY_ID').empty();
+		$('#COUNTRY_ID').append("<option value=''>請選擇...</option>");
+		resultDDL.forEach(kind => {
+			$('#COUNTRY_ID').append("<option value='"+ kind.COUNTRY_ID +"'>"+ kind.COUNTRY_NAME +"</option>");
+		});
+		$('#CITY_ID').empty();
+		$('#CITY_ID').append("<option value=''>請選擇...</option>");
+	} else {
+		$('#CITY_ID').empty();
+		$('#CITY_ID').append("<option value=''>請選擇...</option>");
+		resultDDL.forEach(kind => {
+			$('#CITY_ID').append("<option value='"+ kind.CITY_ID +"'>"+ kind.CITY_NAME +"</option>");
+		});
 	}
-	data.DATA.COUNTRY_ID=parentId;
-	data.DATA.CITY_ID=sonId;
-	var jsonData = JSON.stringify(data);
-	var result = sendRequest("POST", "application/json", "/marker/queryByKind", jsonData, "json", null);
-	resultMarkers = result.DATA.MARKERS;
-	
-	clearMarkersArray();
-	resultMarkers.forEach(marker => {
-		let latlon = {
-			lng: marker.LONGITUDE, 
-	        lat: marker.LATITUDE
-		};
-		let resultMark = setMarker(map, latlon, marker.SN, 1);
-		let infoMsg = "<div align='left'><b>名稱："+ marker.NAME +"</div>";
-		setMarkerInfo(map, resultMark, infoMsg);
-		
-		pushMarkersArray(resultMark);
-	});
-	
-	let content;
-	const bounds = new google.maps.LatLngBounds();
-	let latlon;
-	
-	$('.list-group').empty();
-	resultMarkers.forEach(marker => {
-		let latlon = {
-			lng: parseFloat(marker.LONGITUDE), 
-	        lat: parseFloat(marker.LATITUDE)
-		};
-		bounds.extend(latlon);
-		content = "名稱："+ marker.NAME +"<br>"+ marker.COMMENT;
-		$('.list-group').append("<a class='list-group-item list-group-item-action markerList' id='"+ marker.SN +"' target='_blank'>"+ content +"</a>");
-	});
-	map.fitBounds(bounds);
-
-	initButton();
 }
 

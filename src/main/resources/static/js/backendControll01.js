@@ -92,7 +92,7 @@ function initMapEvent() {
 	      	};
 			
 	      	// Create a marker for each place.
-			let marker = setMarker(map, place.geometry.location, place.name, 1);
+			let marker = createMarker(map, place.geometry.location, place.name, 1);
 			setMarkerInfo(map, marker, place.name);
 			marker.formatted_address = place.formatted_address;
 			pushMarkersArray(marker);

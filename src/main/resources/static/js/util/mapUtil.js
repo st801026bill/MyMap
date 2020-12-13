@@ -42,7 +42,7 @@ function successCallback(map, position){
 		lng: position.coords.longitude, 
         lat: position.coords.latitude
 	};
-	let marker = setMarker(map, latlon, "您的位置", 0);
+	let marker = createMarker(map, latlon, "您的位置", 0);
 	setMarkerInfo(map, marker, "您的位置");
 	
 	map.setCenter(latlon); //定位到目前位置
@@ -58,7 +58,7 @@ function geocoderAddress(address) {
 	geocoder.geocode( { 'address': address}, function(results, status) {
     	if (status == 'OK') {
 	      	map.setCenter(results[0].geometry.location);
-			resultMarker = setMarker(map, results[0].geometry.location, address, 2);
+			resultMarker = createMarker(map, results[0].geometry.location, address, 2);
 			setMarkerInfo(map, resultMarker, address);
 			resultMarker.formatted_address = address;
 			
@@ -70,7 +70,7 @@ function geocoderAddress(address) {
   	});
 }
 
-function setMarker(map, latlon, title, index) {
+function createMarker(map, latlon, title, index) {
 	let icon =  isNaN(index)? index : markerImg[index];
 		
 	var marker = new google.maps.Marker({

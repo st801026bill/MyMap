@@ -14,4 +14,9 @@ label.error {
 	width: 80%;
 }
 
+.list-group>a {
+	cursor: pointer;
+}
+
+
 

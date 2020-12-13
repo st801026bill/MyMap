@@ -76,7 +76,7 @@ function queryMarkers(parentId, sonId) {
 			lng: marker.LONGITUDE, 
 	        lat: marker.LATITUDE
 		};
-		let resultMark = setMarker(map, latlon, marker.SN, 1);
+		let resultMark = createMarker(map, latlon, marker.SN, 1);
 		let infoMsg = "<div align='left'><b>名稱："+ marker.NAME +"</div>";
 		setMarkerInfo(map, resultMark, infoMsg);
 		

@@ -139,6 +139,59 @@
 				</div>
             </div> <!-- /#page-content-wrapper -->
         </div> <!-- /#wrapper -->
+        
+        <!-- update marker dialog -->
+       	<div id="dialog_update_marker" title="更新地點">
+       		<form id="markerForm" onsubmit="return false;" method="POST">
+       			<div class="row">
+           			<div class="col-12">
+						<label class="Must" for="NAME">*名稱:</label>
+					  	<input type="text" class="form-control" id="NAME" name="NAME">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<label>*分類:</label>
+					  	<select class="form-control" id="COUNTRY_ID" name="COUNTRY_ID"></select>
+				  	</div>
+				  	<div class="col-6">
+						<label>　</label>
+				  		<select class="form-control" id="CITY_ID" name="CITY_ID"></select>
+				  	</div>
+			  	</div>
+				<div class="row">
+					<div class="col-12">
+						<label for="ADDRESS">*地址:</label>
+						<button type="button" class="btn btn-success btn-sm" id="searchAddress">
+							<i class="fa fa-search"></i>&nbsp;搜尋
+						</button>
+					  	<input type="text" class="form-control" id="ADDRESS" name="ADDRESS">
+					</div>
+				</div>
+				<div class="row">
+           			<div class="col-sm-6 col-xs-12">
+						<label for="LONGITUDE">*經度:</label>
+					  	<input type="text" class="form-control" id="LONGITUDE" name="LONGITUDE" readonly="readonly">
+					</div>
+					<div class="col-sm-6 col-xs-12">
+					  	<label for="LATITUDE">*緯度:</label>
+					  	<input type="text" class="form-control" id="LATITUDE" name="LATITUDE" readonly="readonly">
+					</div>
+				</div>
+				<div class="row">
+           			<div class="col-sm-6 col-xs-12">
+						<label for="COMMENT">備註:</label>
+					  	<input type="text" class="form-control" id="COMMENT">
+					</div>
+					<div class="col-sm-6 col-xs-12">
+					  	<label for="URL">網址:</label>
+					  	<input type="text" class="form-control" id="URL">
+					</div>
+				</div>
+				<br>
+				<button type="button" class="btn btn-primary btn-block" id="addMarker">新增</button>
+       		</form>
+     	</div>
     	
 	    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 	    <script type="text/javascript" charset="UTF-8" src="js/util/popper.min.js"></script>
