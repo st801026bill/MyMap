@@ -41,13 +41,13 @@ public class MarkerDao {
 	
 	/**
 	 * <pre>
-	 *  新增 點位資料
+	 *  新增/修改 點位資料
 	 * @param pojo
 	 * @return
 	 * </pre>
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public MarkerPojo addMarker(MarkerPojo pojo) {
+	public MarkerPojo saveMarker(MarkerPojo pojo) {
 		MarkerPo po = markerRepository.save(pojoUtil.transPojo2Po(pojo));
 		if(null == po.getSn()) throw new ModuleException(ErrorType.DATABASE_ERROR, "VehiclePolicy");
 		return pojoUtil.transPo2Pojo(po, "");

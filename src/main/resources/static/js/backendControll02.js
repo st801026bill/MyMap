@@ -82,6 +82,16 @@ function queryMarkers(parentId, sonId) {
 		//add marker click event
 		resultMark.addListener('click',function(){
 			$("#dialog_update_marker").dialog("open");
+			$('#SN').val(marker.SN);
+			$('#NAME').val(marker.NAME);
+			$('#COUNTRY_ID').val(marker.COUNTRY_ID);
+			setKindDDL($('#COUNTRY_ID').val());
+			$('#CITY_ID').val(marker.CITY_ID);
+			$('#ADDRESS').val(marker.ADDRESS);
+			$('#LONGITUDE').val(marker.LONGITUDE);
+			$('#LATITUDE').val(marker.LATITUDE);
+			$('#COMMENT').val(marker.COMMENT);
+			$('#URL').val(marker.URL);
 	  	});
 		
 		pushMarkersArray(resultMark);
@@ -122,8 +132,14 @@ function initButton() {
 		queryMarkers($(this).closest('.markerKindList').attr('id'), this.id);
 	});
 	
-	$('#COUNTRY_ID').unbind("change").bind("change", function(){
+	$('#COUNTRY_ID').unbind("change").bind("change", function() {
 		setKindDDL($(this).val());
+	});
+	
+	$('#saveBtn').unbind("click").bind("click", function() {
+		updateMarker();
+		$("#dialog_update_marker").dialog("close");
+		init();
 	});
 }
 
@@ -151,5 +167,13 @@ function setKindDDL(countryId) {
 			$('#CITY_ID').append("<option value='"+ kind.CITY_ID +"'>"+ kind.CITY_NAME +"</option>");
 		});
 	}
+}
+
+function updateMarker() {
+	var data = {};
+	data.DATA=getAllValueByForm("markerForm");
+	var jsonData = JSON.stringify(data);
+	var result = sendRequest("POST", "application/json", "/marker/save", jsonData, "json", null);
+	alert("修改成功");
 }
 

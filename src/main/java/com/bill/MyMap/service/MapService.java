@@ -51,11 +51,11 @@ public class MapService {
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 	
-	public ResponseEntity<?> addMarker(HttpDataTransferObject reqHDTO) {		
+	public ResponseEntity<?> saveMarker(HttpDataTransferObject reqHDTO) {		
 		MarkerPojo marker = httpDataTransferUtil.getDataBean(reqHDTO, "", MarkerPojo.class);
 		
 		//新增 點位資料
-		MarkerPojo pojo = markerDao.addMarker(marker);
+		MarkerPojo pojo = markerDao.saveMarker(marker);
 		log.info(pojo.toString());
 
 		Map<String, Object> resp = new HashMap<>();

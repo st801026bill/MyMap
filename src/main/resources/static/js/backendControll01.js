@@ -141,8 +141,8 @@ function initButton() {
 		var data = {};
 		data.DATA=getAllValueByForm("markerForm");
 		var jsonData = JSON.stringify(data);
-		var result = sendRequest("POST", "application/json", "/marker/add", jsonData, "json", null);
-		alert(result);
+		var result = sendRequest("POST", "application/json", "/marker/save", jsonData, "json", null);
+		alert("新增成功");
 	});
 	
 	$('#searchAddress').bind("click", function() {

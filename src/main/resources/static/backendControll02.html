@@ -143,6 +143,7 @@
         <!-- update marker dialog -->
        	<div id="dialog_update_marker" title="更新地點">
        		<form id="markerForm" onsubmit="return false;" method="POST">
+       			<input type="text" class="form-control" style="display:none" id="SN" name="SN">
        			<div class="row">
            			<div class="col-12">
 						<label class="Must" for="NAME">*名稱:</label>
@@ -189,7 +190,10 @@
 					</div>
 				</div>
 				<br>
-				<button type="button" class="btn btn-primary btn-block" id="addMarker">新增</button>
+				<div class="row">
+					<div class="col-6"><button type="button" class="btn btn-primary btn-block" id="saveBtn">儲存</button></div>
+					<div class="col-6"><button type="button" class="btn btn-danger btn-block" id="deleteBtn">刪除</button></div>
+				</div>
        		</form>
      	</div>
     	
@@ -205,6 +209,7 @@
 	    
 	    <script src="./js/util/ajax.js"></script>
 	    <script src="./js/util/mapUtil.js"></script>
+	    <script src="./js/util/formProcess.js"></script>
 	    <script src="./js/backendControll02.js"></script>
 </body>
 	

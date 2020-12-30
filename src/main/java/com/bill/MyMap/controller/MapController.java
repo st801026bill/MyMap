@@ -29,6 +29,9 @@ public class MapController {
 		return mapService.getMarker(reqHDTO);
 	}
 	
+	/*
+	 * 2. 取得所有Marker
+	 */
 	@RequestMapping(value="/queryAll",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
@@ -38,13 +41,13 @@ public class MapController {
 		return mapService.queryAllMarker(reqHDTO);
 	}
 	
-	@RequestMapping(value="/add",
+	@RequestMapping(value="/save",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addMarker(@RequestBody HttpDataTransferObject reqHDTO) {
+	public ResponseEntity<?> saveMarker(@RequestBody HttpDataTransferObject reqHDTO) {
 		log.info("Got Request body:{}", reqHDTO);
-		return mapService.addMarker(reqHDTO);
+		return mapService.saveMarker(reqHDTO);
 	}
 	
 	@RequestMapping(value="/queryByKind",
