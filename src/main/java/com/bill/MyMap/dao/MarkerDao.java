@@ -13,6 +13,9 @@ import com.bill.MyMap.model.MarkerPojo;
 import com.bill.MyMap.repository.MarkerRepository;
 import com.bill.MyMap.util.PojoUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class MarkerDao {
 	@Autowired
@@ -49,7 +52,23 @@ public class MarkerDao {
 	@Transactional(rollbackFor = Exception.class)
 	public MarkerPojo saveMarker(MarkerPojo pojo) {
 		MarkerPo po = markerRepository.save(pojoUtil.transPojo2Po(pojo));
-		if(null == po.getSn()) throw new ModuleException(ErrorType.DATABASE_ERROR, "VehiclePolicy");
+		if(null == po.getSn()) throw new ModuleException(ErrorType.DATABASE_ERROR, "Marker");
 		return pojoUtil.transPo2Pojo(po, "");
+	}
+	
+	/**
+	 * <pre>
+	 *  刪除 點位資料
+	 * @param pojo
+	 * @return
+	 * </pre>
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteMarkerBySn(Integer sn) {
+		try {
+			markerRepository.deleteById(sn);
+		} catch (Exception e) {
+			log.error("delete fails... "+ e.getMessage());
+		}
 	}
 }

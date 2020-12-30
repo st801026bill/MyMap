@@ -20,6 +20,9 @@ public class MapController {
 	@Autowired
 	private MapService mapService;
 	
+	/*
+	 * 1. 取得指定Marker
+	 */
 	@RequestMapping(value="/query",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
@@ -41,6 +44,9 @@ public class MapController {
 		return mapService.queryAllMarker(reqHDTO);
 	}
 	
+	/*
+	 * 3.新增/修改指定Marker
+	 */
 	@RequestMapping(value="/save",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
@@ -50,6 +56,21 @@ public class MapController {
 		return mapService.saveMarker(reqHDTO);
 	}
 	
+	/*
+	 * 4. 刪除指定Marker
+	 */
+	@RequestMapping(value="/delete",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> deleteMarker(@RequestBody HttpDataTransferObject reqHDTO) {
+		log.info("Got Request body:{}", reqHDTO);
+		return mapService.deleteMarker(reqHDTO);
+	}
+	
+	/*
+	 * 5 依分類取得Marker
+	 */
 	@RequestMapping(value="/queryByKind",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
@@ -59,6 +80,9 @@ public class MapController {
 		return mapService.queryByKind(reqHDTO);
 	}
 	
+	/*
+	 * 6. 取得分類下拉
+	 */
 	@RequestMapping(value="/kindDDL",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,

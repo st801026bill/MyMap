@@ -34,7 +34,6 @@ function initView() {
 		width: "60%",
  		show: "blind",
 	 	hide: "explode"
-		
  	});
 
 	//設定分類DDL
@@ -141,6 +140,12 @@ function initButton() {
 		$("#dialog_update_marker").dialog("close");
 		init();
 	});
+	
+	$('#deleteBtn').unbind("click").bind("click", function() {
+		deleteMarker();
+		$("#dialog_update_marker").dialog("close");
+		init();
+	});
 }
 
 function setKindDDL(countryId) {
@@ -175,5 +180,14 @@ function updateMarker() {
 	var jsonData = JSON.stringify(data);
 	var result = sendRequest("POST", "application/json", "/marker/save", jsonData, "json", null);
 	alert("修改成功");
+}
+
+function deleteMarker() {
+	var data = {};
+	data.DATA = {};
+	data.DATA.SN = parseInt($('#SN').val());
+	var jsonData = JSON.stringify(data);
+	var result = sendRequest("POST", "application/json", "/marker/delete", jsonData, "json", null);
+	alert("刪除成功");
 }
 

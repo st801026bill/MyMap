@@ -34,11 +34,10 @@ public class MapService {
 	PojoUtil pojoUtil;
 	
 	public ResponseEntity<?> getMarker(HttpDataTransferObject reqHDTO) {
-		Map<String, Object> resp = new HashMap<>();
-		
 		Integer sn = httpDataTransferUtil.getTranrqUnderlyingType(reqHDTO, "SN", Integer.class);
 		MarkerPojo marker = markerDao.findBySn(sn);
 		
+		Map<String, Object> resp = new HashMap<>();
 		resp.put("MARKER", marker);
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
@@ -60,6 +59,14 @@ public class MapService {
 
 		Map<String, Object> resp = new HashMap<>();
 		resp.put("MARKER", pojo);
+		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> deleteMarker(HttpDataTransferObject reqHDTO) {
+		Integer sn = httpDataTransferUtil.getTranrqUnderlyingType(reqHDTO, "SN", Integer.class);
+		markerDao.deleteMarkerBySn(sn);
+		
+		Map<String, Object> resp = new HashMap<>();
 		return httpDataTransferUtil.boxingResEntity(reqHDTO, resp, HttpStatus.OK);
 	}
 	
